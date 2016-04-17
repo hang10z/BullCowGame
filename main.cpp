@@ -14,10 +14,11 @@ string GetGuess();
 int main()
 {
 	PrintIntro();
-	string guess1 = GetGuess();
-	cout << "Your guess was " << guess1 << endl;
-	string guess2 = GetGuess();
-	cout << "Your guess was " << guess2 << endl;
+	for (int count = 1; count <= 5; count++)
+	{
+		string guess = GetGuess();
+		cout << "Your guess was " << guess << endl;
+	}
 	return 0;
 
 }
