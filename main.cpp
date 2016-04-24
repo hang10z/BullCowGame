@@ -8,15 +8,35 @@ using namespace std;
 void PrintIntro();
 void PlayGame();
 string GetGuess();
+bool AskToPlayAgain();
 
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again? ";
+	string Response = "";
+	getline(cin, Response);
+
+	//get the first character entered, is it y?
+	if (Response[0] == 'y' || Response[0] == 'Y')
+	{
+		return true;
+	}
+	return false;
+}
 
 //Entry point for our application
 int main()
 {
-	PrintIntro();
-	PlayGame();
-	return 0;	//exit app
+	do
+	{
+		PrintIntro();
+		PlayGame();
 
+	} while (AskToPlayAgain() == true);
+
+	//exit game
+	return 0;
 }
 
 
@@ -26,7 +46,7 @@ void PlayGame()
 	{
 		string guess = GetGuess();
 		cout << "Your guess was " << guess << endl;
-		cout << endl;	//put a space between each run in the loop
+		cout << endl; //put a space between each run in the loop
 	}
 }
 
@@ -50,5 +70,4 @@ string GetGuess()
 	cout << "Please type in your guess: ";
 	getline(cin, Guess);
 	return Guess;
-	
 }
