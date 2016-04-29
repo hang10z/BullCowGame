@@ -25,7 +25,7 @@ int32 FBullCowGame::GetHiddenWordLength() const
 
 bool FBullCowGame::IsGameWon() const
 {
-	return false;
+	return bGameIsWon;
 }
 
 void FBullCowGame::Reset()
@@ -35,9 +35,8 @@ void FBullCowGame::Reset()
 
 	const FString HIDDEN_WORD = "planet";
 	MyHiddenWord = HIDDEN_WORD;
-
 	MyCurrentTry = 1;
-	
+	bGameIsWon = false;
 	return;
 }
 
@@ -66,6 +65,7 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 //recieves valid guess, increments turn and returns count
 FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)		//"Guess" gives the passed string a variable name to use in the function
 {
+	
 	MyCurrentTry++;
 	FBullCowCount BullCowCount;
 	int32 WordLength = MyHiddenWord.length();
@@ -93,7 +93,14 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)		//"Guess" gives the
 		}
 			
 	}
-		
+	if (BullCowCount.Bulls == WordLength)
+	{
+		bGameIsWon = true;
+	}
+	else
+	{
+		bGameIsWon = false;
+	}
 	return BullCowCount;
 }
 
