@@ -19,10 +19,11 @@ void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
 FBullCowGame BCGame;				// instantiate class ( a new game)
+void PrintGameSummary();
 
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again? ";
+	std::cout << "Do you want to play again with the same hidden word? ";
 	FText Response = "";
 	getline(std::cin, Response);
 
@@ -33,6 +34,7 @@ bool AskToPlayAgain()
 	}
 	return false;
 }
+
 
 //Entry point for our application
 int main()
@@ -62,7 +64,7 @@ void PlayGame()
 		FText Guess = GetValidGuess();
 
 		
-		//TODO: Submit Valid Guess To The Game and receive counts
+		//Submit Valid Guess To The Game and receive counts
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 		
 
@@ -72,8 +74,9 @@ void PlayGame()
 		std::cout << std::endl; 
 	}
 
-	//TODO: Add game summary
-
+	//Add game summary
+	PrintGameSummary();
+	return;
 }
 
 
@@ -120,4 +123,16 @@ FText GetValidGuess()
 		std::cout << std::endl;
 	} while (Status != EGuessStatus::OK);  //keep looping until we get no errors
 	return Guess;
+}
+
+void PrintGameSummary()
+{
+	if (BCGame.IsGameWon())
+	{
+		std::cout << "You've Won!  You have found the hidden word!  You Rock!\n";
+	}
+	else
+	{
+		std::cout << "Sorry, You lost and are Stupid!! HAHAHAHA!! \n";
+	}
 }
